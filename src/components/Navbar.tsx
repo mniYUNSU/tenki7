@@ -19,9 +19,7 @@ export default function Navbar({}: Props) {
           <FaLocationCrosshairs className='text-2xl text-rose-500 hover:opacity-80 cursor-pointer' />
           <FaLocationDot className='text-2xl text-indigo-100' />
           <p className='text-sm text-indigo-100 font-mono'> Seoul </p>
-          <div>
-            <SearchBox />
-          </div>
+          <div>{/* <SearchBox /> */}</div>
         </section>
       </div>
     </nav>

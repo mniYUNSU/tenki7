@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Inter'), url('/path/to/inter-font.woff2') format('woff2');
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}

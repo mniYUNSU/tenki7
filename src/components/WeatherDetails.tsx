@@ -3,6 +3,8 @@ import { FiDroplet } from 'react-icons/fi';
 import { ImMeter } from 'react-icons/im';
 import { LuEye, LuSunrise, LuSunset } from 'react-icons/lu';
 import { MdAir } from 'react-icons/md';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export interface WeathreDetailProps {
   visibility: string;
@@ -14,6 +16,8 @@ export interface WeathreDetailProps {
 }
 
 export default function WeatherDetails(props: WeathreDetailProps) {
+  const { t } = useTranslation('common');
+
   const {
     visibility = '25km',
     humidity = '61%',
@@ -27,32 +31,32 @@ export default function WeatherDetails(props: WeathreDetailProps) {
     <>
       <SingleWeatherDetail
         icon={<LuEye />}
-        information='Visibility'
+        information={t('visibility')}
         value={visibility}
       />
       <SingleWeatherDetail
         icon={<FiDroplet />}
-        information='Humidity'
+        information={t('humidity')}
         value={humidity}
       />
       <SingleWeatherDetail
         icon={<MdAir />}
-        information='Wind Speed'
+        information={t('windSpeed')}
         value={windSpeed}
       />
       <SingleWeatherDetail
         icon={<ImMeter />}
-        information='Air Pressure'
+        information={t('airPressure')}
         value={airPressure}
       />
       <SingleWeatherDetail
         icon={<LuSunrise />}
-        information='Sunrise'
+        information={t('sunrise')}
         value={sunrise}
       />
       <SingleWeatherDetail
         icon={<LuSunset />}
-        information='Sunset'
+        information={t('sunset')}
         value={sunset}
       />
     </>

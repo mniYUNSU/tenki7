@@ -13,8 +13,10 @@ import axios from 'axios';
 import { format, fromUnixTime, parseISO } from 'date-fns';
 import { useAtom } from 'jotai';
 import { useQuery } from 'react-query';
-import { loadingCityAtom, placeAtom } from './atom';
+import { loadingCityAtom, placeAtom } from '@/app/atom';
 import { useEffect } from 'react';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 interface WeatherDetail {
   dt: number;
@@ -71,7 +73,17 @@ interface WeatherData {
   };
 }
 
+export async function getStaticProps({ locale }: { locale: string }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common']))
+    }
+  };
+}
+
 export default function Home() {
+  const { t } = useTranslation('common');
+
   const [place, setPlace] = useAtom(placeAtom);
   const [loadingCity, setLoadingCity] = useAtom(loadingCityAtom);
 
@@ -111,9 +123,9 @@ export default function Home() {
 
   if (isLoading)
     return (
-      <div className='flex items-center min-h-screen justify-center bg-slate-900'>
+      <div className='flex items-center min-h-screen justify-center bg-slate-900 '>
         <p className='animate-pulse text-indigo-50 text-3xl font-mono font-bold'>
-          LOADING...
+          {t('loading')}
         </p>
       </div>
     );
@@ -130,7 +142,9 @@ export default function Home() {
             <section className='space-y-4'>
               <div className='space-y-2'>
                 <h2 className='flex gap-1 text-2xl items-end text-indigo-50'>
-                  <p>{format(parseISO(firstData?.dt_txt ?? ''), 'EEEE')}</p>
+                  <p>
+                    {t(`${format(parseISO(firstData?.dt_txt ?? ''), 'EEEE')}`)}
+                  </p>
                   <p className='text-lg text-indigo-50/70'>
                     ({format(parseISO(firstData?.dt_txt ?? ''), 'yyyy.MM.dd')})
                   </p>
@@ -142,7 +156,7 @@ export default function Home() {
                       {convertKelvinToCelsius(firstData?.main.temp ?? 296.37)}°
                     </span>
                     <p className='text-xs space-x-1 whitespace-nowrap text-indigo-50'>
-                      <span>Feels like</span>
+                      <span>{t('feelsLike')}</span>
                       <span>
                         {convertKelvinToCelsius(
                           firstData?.main.feels_like ?? 296.37
@@ -151,7 +165,7 @@ export default function Home() {
                       </span>
                     </p>
                     <p className='text-xs space-x-2 text-indigo-50'>
-                      <span className=' text-blue-500 '>
+                      <span className='text-blue-500'>
                         {convertKelvinToCelsius(firstData?.main.temp_min ?? 0)}
                         °↓{' '}
                       </span>
@@ -170,7 +184,9 @@ export default function Home() {
                         className='flex flex-col justify-between gap-2 items-center text-xs font-semibold'
                       >
                         <p className='whitespace-nowrap'>
-                          {format(parseISO(data.dt_txt), 'h:mm a')}
+                          {t(`${format(parseISO(data.dt_txt), 'a')}`)}
+                          {'  '}
+                          {format(parseISO(data.dt_txt), 'h:mm')}
                         </p>
                         <WeathreIcon
                           iconName={getDayOrNightIcon(
@@ -222,7 +238,7 @@ export default function Home() {
             </section>
             {/* 7 Day Forecast */}
             <section className='flex w-full flex-col gap-4'>
-              <p className='text-2xl text-indigo-50'>7 Days Forecast</p>
+              <p className='text-2xl text-indigo-50'>{t('7days')}</p>
               {firstDataForEachDate.map((d, index) => (
                 <ForecastWeatherDetail
                   key={index}

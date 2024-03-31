@@ -1,0 +1,20 @@
+{
+  "loading": "しばらくお待ちください。。。",
+  "Monday": "月曜日",
+  "Tuesday": "火曜日",
+  "Wednesday": "水曜日",
+  "Thursday": "木曜日",
+  "Friday": "金曜日",
+  "Saturday": "土曜日",
+  "Sunday": "日曜日",
+  "feelsLike": "体感温度",
+  "PM": "午後",
+  "AM": "午前",
+  "visibility": "視程",
+  "humidity": "湿度",
+  "windSpeed": "風",
+  "airPressure": "気圧",
+  "sunrise": "日の出",
+  "sunset": "日の入り",
+  "7days": "7日間の天気"
+}

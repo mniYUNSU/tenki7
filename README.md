@@ -15,4 +15,4 @@
 
 - Get User's Current Location Weather Forecast
 - Search Specific Location Weather Forecast
--
+- Internalization i18n (Korean, English, Japanese)

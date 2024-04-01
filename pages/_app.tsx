@@ -12,7 +12,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>TENKI 7</title>
         <meta property='og:title' content='TENKI 7' key='title' />
-        <link rel='icon' href='/images/favicon.ico' type='image/x-icon' />
       </Head>
       <Component {...pageProps} />
     </QueryClientProvider>

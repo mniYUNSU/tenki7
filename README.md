@@ -10,6 +10,7 @@
 - Openweather API
 - react-query
 - Jotai
+- next-i18next
 
 ### Functions
 

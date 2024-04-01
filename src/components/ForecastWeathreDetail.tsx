@@ -47,7 +47,9 @@ export default function ForecastWeatherDetail(
             <span>{t('feelsLike')}</span>
             <span>{convertKelvinToCelsius(feels_like ?? 0)}°</span>
           </p>
-          <p className='text-sm capitalize text-center'>{description}</p>
+          <p className='text-sm capitalize text-center'>
+            {t(`${description}`)}
+          </p>
         </div>
       </section>
       {/* Right */}

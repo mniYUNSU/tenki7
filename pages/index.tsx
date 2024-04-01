@@ -13,10 +13,11 @@ import axios from 'axios';
 import { format, fromUnixTime, parseISO } from 'date-fns';
 import { useAtom } from 'jotai';
 import { useQuery } from 'react-query';
-import { loadingCityAtom, placeAtom } from '@/app/atom';
+import { currentLocale, loadingCityAtom, placeAtom } from '@/app/atom';
 import { useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useRouter } from 'next/router';
 
 interface WeatherDetail {
   dt: number;
@@ -86,6 +87,9 @@ export default function Home() {
 
   const [place, setPlace] = useAtom(placeAtom);
   const [loadingCity, setLoadingCity] = useAtom(loadingCityAtom);
+  const [locale, setLocale] = useAtom(currentLocale);
+
+  const router = useRouter();
 
   const { isLoading, error, data, refetch } = useQuery<WeatherData>(
     'repoData',
@@ -98,12 +102,14 @@ export default function Home() {
   );
 
   useEffect(() => {
+    setLocale(router.locale ?? 'en');
+  }, [router.locale, setLocale]);
+
+  useEffect(() => {
     refetch();
   }, [place, refetch]);
 
   const firstData = data?.list[0];
-
-  console.log(data);
 
   const uniqueDates = [
     ...new Set(
@@ -204,7 +210,7 @@ export default function Home() {
                 {/* Left */}
                 <Container className='w-fit justify-center flex-col px-4 items-center border-lime-400'>
                   <p className=' capitalize text-center'>
-                    {firstData?.weather[0].description}
+                    {t(`${firstData?.weather[0].description}`)}
                   </p>
                   <WeathreIcon
                     iconName={getDayOrNightIcon(

@@ -157,7 +157,7 @@ export default function Home() {
                 </h2>
                 <Container className=' gap-10 px-6 items-center border-lime-400'>
                   {/* Temperature */}
-                  <div className='flex flex-col items-center px-4'>
+                  <div className='flex flex-col items-center px-5'>
                     <span className='text-5xl text-indigo-50'>
                       {convertKelvinToCelsius(firstData?.main.temp ?? 296.37)}°
                     </span>
@@ -173,10 +173,9 @@ export default function Home() {
                     <p className='text-xs space-x-2 text-indigo-50'>
                       <span className='text-blue-500'>
                         {convertKelvinToCelsius(firstData?.main.temp_min ?? 0)}
-                        °↓{' '}
+                        °↓
                       </span>
                       <span className='text-rose-600'>
-                        {' '}
                         {convertKelvinToCelsius(firstData?.main.temp_max ?? 0)}
                         °↑
                       </span>
